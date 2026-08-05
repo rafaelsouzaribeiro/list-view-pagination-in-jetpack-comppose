@@ -39,7 +39,7 @@ fun MoviesListScreen(
                         contentPadding = PaddingValues(vertical = 16.dp),
                         verticalArrangement = Arrangement.spacedBy(32.dp)
                     ) {
-                        items(state.movieSections.results) { movie ->
+                        items(state.movieSections) { movie ->
                             Text(
                                 text = movie.title,
                                 modifier = Modifier.padding(16.dp)

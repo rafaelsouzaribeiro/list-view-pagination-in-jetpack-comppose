@@ -2,9 +2,7 @@ package com.example.listview.ui.movies
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.listview.model.MovieListResponse
-import com.example.listview.model.MovieResponse
+import com.example.listview.model.Movie
 import com.example.listview.repository.MovieRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -38,7 +36,7 @@ class MovieListViewModel (
     }
 
     sealed interface MoviesListStates{
-        data class Success(val movieSections: MovieListResponse): MoviesListStates
+        data class Success(val movieSections: List<Movie>): MoviesListStates
         data object Loading: MoviesListStates
         data class Error(val message: String): MoviesListStates
     }

@@ -45,7 +45,6 @@ class MovieListViewModel(
                     )
                 }
             } catch (e: Exception) {
-                // só mostra erro se ainda não tinha lista carregada
                 if (accumulatedMovies.isEmpty()) {
                     _moviesListState.update {
                         MoviesListStates.Error(e.message ?: "An unexpected error occurred")

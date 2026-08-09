@@ -42,7 +42,6 @@ fun MoviesListRoute(
     val state by viewModel.movieListStates.collectAsStateWithLifecycle()
     val listState = rememberLazyListState()
 
-    // dispara quando chega no final visível da lista
     LaunchedEffect(listState, state) {
         snapshotFlow {
             val layoutInfo = listState.layoutInfo
@@ -76,12 +75,12 @@ private fun MoviesListScreen(
                 .padding(paddingValues)
         ) {
             when (state) {
-                MoviesListStates.Loading -> LoadingContent()
                 is MoviesListStates.Error -> ErrorContent(message = state.message)
                 is MoviesListStates.Success -> MoviesContent(
                     movies = state.movieSections.items,
                     listState = listState
                 )
+                is MoviesListStates.Loading -> LoadingContent()
             }
         }
     }
@@ -121,7 +120,7 @@ private fun LoadingContent() {
         modifier = Modifier
             .fillMaxSize()
             .padding(24.dp)
-            .wrapContentSize(Alignment.Center)
+            .wrapContentSize(Alignment.BottomCenter)
     )
 }
 

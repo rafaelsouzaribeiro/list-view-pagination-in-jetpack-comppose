@@ -41,6 +41,7 @@ fun MoviesListRoute(
 ) {
     val state by viewModel.movieListStates.collectAsStateWithLifecycle()
     val listState = rememberLazyListState()
+    val isPaginating by viewModel.isPaginating.collectAsStateWithLifecycle()
 
     LaunchedEffect(listState, state) {
         snapshotFlow {
@@ -58,7 +59,8 @@ fun MoviesListRoute(
 
     MoviesListScreen(
         state = state,
-        listState = listState
+        listState = listState,
+        isPaginating = isPaginating
     )
 }
 
@@ -66,7 +68,8 @@ fun MoviesListRoute(
 @Composable
 private fun MoviesListScreen(
     state: MoviesListStates,
-    listState: LazyListState
+    listState: LazyListState,
+    isPaginating: Boolean
 ) {
     Scaffold { paddingValues ->
         Box(
@@ -78,7 +81,8 @@ private fun MoviesListScreen(
                 is MoviesListStates.Error -> ErrorContent(message = state.message)
                 is MoviesListStates.Success -> MoviesContent(
                     movies = state.movieSections.items,
-                    listState = listState
+                    listState = listState,
+                    isPaginating = isPaginating
                 )
                 is MoviesListStates.Loading -> LoadingContent()
             }
@@ -89,7 +93,8 @@ private fun MoviesListScreen(
 @Composable
 private fun MoviesContent(
     movies: List<Movie>,
-    listState: LazyListState
+    listState: LazyListState,
+    isPaginating: Boolean
 ) {
     LazyColumn(
         state = listState,
@@ -109,6 +114,12 @@ private fun MoviesContent(
                 Text(text = movie.title, style = MaterialTheme.typography.titleMedium)
             }
 
+        }
+
+        if (isPaginating) {
+            item(key = "pagination_loader") {
+                LoadingContent()
+            }
         }
     }
 }

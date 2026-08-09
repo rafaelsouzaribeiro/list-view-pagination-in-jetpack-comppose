@@ -18,7 +18,9 @@ class MovieListViewModel(
     val movieListStates = _moviesListState.asStateFlow()
 
     private var currentPage = 0
-    private var isPaginating = false
+    private val _isPaginating = MutableStateFlow(false)
+    val isPaginating = _isPaginating.asStateFlow()
+
     private var endReached = false
     private val accumulatedMovies = mutableListOf<Movie>()
 
@@ -27,10 +29,10 @@ class MovieListViewModel(
     }
 
     fun loadPage() {
-        if (isPaginating || endReached) return
+        if (_isPaginating.value || endReached) return
 
         viewModelScope.launch {
-            isPaginating = true
+            _isPaginating.value = true
             try {
                 val nextPage = currentPage + 1
                 val pageResult = repository.getPopularMoviesPage(nextPage)
@@ -51,14 +53,14 @@ class MovieListViewModel(
                     }
                 }
             } finally {
-                isPaginating = false
+                _isPaginating.value = false
             }
         }
     }
 }
 
 
-sealed interface MoviesListStates{
+    sealed interface MoviesListStates{
     data class Success(val movieSections: PagedResult<Movie>): MoviesListStates
     data object Loading: MoviesListStates
     data class Error(val message: String): MoviesListStates

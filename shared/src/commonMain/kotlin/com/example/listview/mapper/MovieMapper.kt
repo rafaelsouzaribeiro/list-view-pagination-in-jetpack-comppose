@@ -6,6 +6,7 @@ import com.example.listview.model.Movie
 import com.example.listview.model.MovieResponse
 import com.example.listview.network.IMAGE_BASE_URL
 import com.example.listview.utils.formatRating
+import kotlinx.datetime.LocalDate
 
 
 fun MovieResponse.toModel(
@@ -30,7 +31,9 @@ fun MovieResponse.toModel(
 )
 
 private fun MovieResponse.getYearGenresFromReleaseDate():Int{
-    return this.releaseDate.year
+    return releaseDate
+        ?.let { runCatching { LocalDate.parse(it).year }.getOrNull() }
+        ?: 0
 }
 
 private fun MovieResponse.getDurationForHourandMinutes():String?{

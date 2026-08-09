@@ -10,6 +10,8 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import kotlin.text.append
+import kotlin.text.get
 
 
 private const val BASEURL="https://api.themoviedb.org"
@@ -37,8 +39,8 @@ class KortClient {
         }
     }
 
-    suspend fun  getMoviesPopular(): MovieListResponse {
-        return kortClient.get("${BASEURL}/3/movie/popular").body()
-
+    suspend fun getMoviesPopular(page: Int): MovieListResponse {
+        return kortClient.get("$BASEURL/3/movie/popular?page=$page").body()
     }
+
 }

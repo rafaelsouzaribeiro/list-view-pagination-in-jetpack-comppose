@@ -6,7 +6,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.listview.di.kortClientModule
 import com.example.listview.di.repositoryModule
 import com.example.listview.di.viewModelModule
-import com.example.listview.ui.movies.MoviesListScreen
+import com.example.listview.ui.movies.MoviesListRoute
 import org.koin.compose.KoinApplication
 import org.koin.dsl.koinConfiguration
 
@@ -17,7 +17,7 @@ fun App() {
         modules(kortClientModule, repositoryModule, viewModelModule)
     }) {
         MaterialTheme {
-            MoviesListScreen()
+            MoviesListRoute()
         }
     }
 }

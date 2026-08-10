@@ -17,7 +17,7 @@ Um projeto multiplataforma desenvolvido com **Kotlin Multiplatform (KMP)** e **J
 ### 1. Criar Conta no TMDB
 
 1. Acesse https://www.themoviedb.org/signup
-2. Preencha nome, e-mail e senha → clique em **Junte-se ao TMDB**
+2. Preencha nome de usuário, senha, confirma senha e e-mail → clique em **Registrar**
 3. Confirme o e-mail recebido na sua caixa de entrada
 
 ### 2. Gerar o Access Token

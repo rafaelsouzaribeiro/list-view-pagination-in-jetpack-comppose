@@ -1,6 +1,6 @@
 # 📱 Lista com Paginação - KMP Jetpack Compose (iOS e Android)
 
-Um projeto multiplataforma desenvolvido com **Kotlin Multiplatform (KMP)** e **Jetpack Compose** que demonstra implementação de lista com paginação usando **Paging 3**, integrando dados da **TMDB API**.
+Um projeto multiplataforma desenvolvido com **Kotlin Multiplatform (KMP)** e **Jetpack Compose** que demonstra implementação de lista com paginação, integrando dados da **TMDB API**.
 
 ## ✨ Características
 
